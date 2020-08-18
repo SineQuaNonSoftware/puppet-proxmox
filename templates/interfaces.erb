@@ -1,0 +1,29 @@
+auto lo
+iface lo inet loopback
+#iface lo inet6 loopback
+
+auto vmbr0
+iface vmbr0 inet static
+  address <%= $::ipaddress %>
+  netmask <%= $::netmask %>
+  gateway 135.181.56.65
+  bridge_ports enp35s0
+  bridge_stp off
+  bridge_fd 0
+
+# vmbr1: Bridging. Private LAN with masquerade
+auto vmbr1
+iface vmbr1 inet static
+  address 10.0.1.1/24
+  bridge_ports none
+  bridge_stp off
+  bridge_fd 0
+  post-up   echo 1 > /proc/sys/net/ipv4/ip_forward
+  post-up   iptables -t nat -A POSTROUTING -s '10.0.1.0/24' -o vmbr0 -j MASQUERADE
+  post-down iptables -t nat -D POSTROUTING -s '10.0.1.0/24' -o vmbr0 -j MASQUERADE
+
+#TODO figure out IPv6 on Proxmox
+#iface enp35s0 inet6 static
+#  address 2a01:4f9:4b:3b6c::2
+#  netmask 64
+#  gateway fe80::1
