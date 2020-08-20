@@ -16,7 +16,7 @@ A "one click" Proxmox installation over a fresh Debian install.
 ## Description
 
 The purpose of this module is to provision Proxmox servers at providers who don't offer the option.
-You just order a Debian 10, run puppet and voila! You have default a Proxmox server.
+You just order a Debian 10, run puppet and voila! You have a default Proxmox server.
 
 We do not plan on adding features for anything that can be done via Proxmox's web interface, command line, terraform... 
 
@@ -43,20 +43,11 @@ They have a lot in common, but when you have a specific problem or need, go to P
 
 * Install puppet-agent
 * puppet-run
-
-### Beginning with proxmox
-
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most basic
-use of the module.
+* Profit!
 
 ## Usage
 
-Include usage examples for common use cases in the **Usage** section. Show your
-users how to use your module to solve problems, and be sure to include code
-examples. Include three to five examples of the most important or common tasks a
-user can accomplish with your module. Show users how to accomplish more complex
-tasks that involve different types, classes, and functions working in tandem.
+include proxmox
 
 ## Reference
 

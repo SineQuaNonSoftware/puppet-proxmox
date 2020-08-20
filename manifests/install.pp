@@ -1,3 +1,8 @@
+# @summary This class installs Proxmox
+# @note It also configures:
+# - a public bridge network for VMs or CTs with public IPs
+# - a private bridge network for VMs or CTs without public IPs, but with NAT so they can access the internet
+
 class proxmox::install {
   package { ['os-prober':
     ensure => 'absent'

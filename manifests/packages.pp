@@ -1,3 +1,5 @@
+# @summary This class adds Proxmox repositories and performs a full-upgrade
+
 class proxmox::packages {
   file { '/etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg':
     ensure => 'present',
