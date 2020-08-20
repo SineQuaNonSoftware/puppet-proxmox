@@ -4,7 +4,7 @@
 # - a private bridge network for VMs or CTs without public IPs, but with NAT so they can access the internet
 
 class proxmox::install {
-  package { ['os-prober':
+  package { 'os-prober':
     ensure => 'absent'
   }
 ->package { ['proxmox-ve', 'postfix', 'open-iscsi']:
