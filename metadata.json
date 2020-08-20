@@ -1,6 +1,6 @@
 {
   "name": "cornuwel-proxmox",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "author": "Julien Cornuwel",
   "summary": "A simple module that just installs Proxmox over a fresh Debian buster",
   "license": "MIT",
@@ -16,7 +16,7 @@
       "operatingsystemrelease": [
         "10"
       ]
-    },
+    }
   ],
   "requirements": [
     {

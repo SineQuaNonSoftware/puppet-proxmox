@@ -5,4 +5,7 @@ class proxmox::hostname {
     ip            => $facts['ipaddress'],
     host_aliases  => $facts['hostname'],
   }
+  reboot { 'hostname change':
+    subscribe       => Host['proxmox'],
+  }
 }

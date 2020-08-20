@@ -7,13 +7,13 @@
 #   include proxmox
 
 class proxmox {
-  contain proxmox::hostname
-  contain proxmox::packages
-  contain proxmox::install
-  contain proxmox::config
+  contain proxmox::hostname # This should be handled in terraform, same as apt full-upgrade and installing Puppet packages
+  contain proxmox::packages # Setup the puppet repo and do another full-upgrade
+  contain proxmox::install # Actually install ProxmoxVE and reboots
+  contain proxmox::cleanup # Remove mainline linux kernel
 
   Class['proxmox::hostname']
   -> Class['proxmox::packages']
   -> Class['proxmox::install']
-  ~> Class['proxmox::config']
+  -> Class['proxmox::cleanup']
 }

@@ -1,10 +1,6 @@
 # proxmox
 
-Welcome to your new module. A short overview of the generated parts can be found
-in the [PDK documentation][1].
-
-The README template below provides a starting point with details about what
-information to include in your README.
+A "one click" Proxmox installation over a fresh Debian install.
 
 ## Table of Contents
 
@@ -19,35 +15,34 @@ information to include in your README.
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your
-module does and what kind of problems users can solve with it.
+The purpose of this module is to provision Proxmox servers at providers who don't offer the option.
+You just order a Debian 10, run puppet and voila! You have default a Proxmox server.
 
-This should be a fairly short description helps the user decide if your module
-is what they want.
+We do not plan on adding features for anything that can be done via Proxmox's web interface, command line, terraform... 
 
 ## Setup
 
-### What proxmox affects **OPTIONAL**
+### What proxmox affects
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
+The module only does one thing, install Proxmox. But Proxmox itself changes a lot of things during the installation process (just look at how long it takes).
+So, the resulting product of a successful puppet run should no longer be considered as a Debian, but a Proxmox server.
+They have a lot in common, but when you have a specific problem or need, go to Proxmox's documentation first.
 
-If there's more that they should know about, though, this is the place to
-mention:
+### Setup Requirements
 
-* Files, packages, services, or operations that the module will alter, impact,
-  or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
+* A clean Debian install
+* A correct hostname configuration:
 
-### Setup Requirements **OPTIONAL**
+**/etc/hosts** file should at least contain IPv4 config:
+```
+127.0.0.1 localhost.localdomain localhost
+<public_server_ip>  proxmox.domain.com proxmox
+<puppetserver_ip>   puppet
+```
+**/etc/hostname** should just contain the fqdn (proxmox.domain.com)
 
-If your module requires anything extra before setting up (pluginsync enabled,
-another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section here.
+* Install puppet-agent
+* puppet-run
 
 ### Beginning with proxmox
 
