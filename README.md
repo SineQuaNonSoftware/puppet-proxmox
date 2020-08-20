@@ -47,7 +47,9 @@ They have a lot in common, but when you have a specific problem or need, go to P
 
 ## Usage
 
+```
 include proxmox
+```
 
 ## Reference
 
