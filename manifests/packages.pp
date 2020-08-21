@@ -16,5 +16,7 @@ class proxmox::packages {
     repos    => 'pve-no-subscription',
     notify   => Exec['apt_update']
   }
-~>exec { '/usr/bin/apt full-upgrade -y': }
+~>exec { '/usr/bin/apt full-upgrade -y':
+    refreshonly => true,
+  }
 }
