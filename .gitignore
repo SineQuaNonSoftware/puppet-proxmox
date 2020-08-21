@@ -26,3 +26,4 @@
 .envrc
 /inventory.yaml
 manual_install_history.txt
+manual_first_puppet_run.txt
