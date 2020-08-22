@@ -4,10 +4,10 @@ iface lo inet loopback
 
 auto vmbr0
 iface vmbr0 inet static
-  address <%= $::ipaddress %>
-  netmask <%= $::netmask %>
+  address <%= @ipaddress %>
+  netmask <%= @netmask %>
   gateway 135.181.56.65
-  # test we can access our gateway properly : <%= $::gateway %>
+  # test we can access our gateway properly : <%= @gateway %>
   bridge_ports enp35s0
   bridge_stp off
   bridge_fd 0
