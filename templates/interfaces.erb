@@ -6,9 +6,9 @@ auto vmbr0
 iface vmbr0 inet static
   address <%= @ipaddress %>
   netmask <%= @netmask %>
-  gateway 135.181.56.65
-  # test we can access our gateway properly : <%= @gateway %>
+  gateway <%= @gateway %>
   bridge_ports enp35s0
+  # test we can access our network device id : <%= @netdev %>
   bridge_stp off
   bridge_fd 0
 
