@@ -20,6 +20,6 @@ class proxmox::install {
     mode    => '0644'
   }
   reboot { '/etc/network/interfaces':
-    subscribe => [ File['/etc/network/interfaces'], Package['proxmox-ve']
+    subscribe => [ File['/etc/network/interfaces'], Package['proxmox-ve'] ],
   }
 }
