@@ -19,7 +19,8 @@ class proxmox::install {
     group   => 'root',
     mode    => '0644'
   }
-  reboot { '/etc/network/interfaces':
-    subscribe => [ File['/etc/network/interfaces'], Package['proxmox-ve'] ],
-  }
+#TODO: Put this back in after we can generate a proper network config
+#  reboot { '/etc/network/interfaces':
+#    subscribe => [ File['/etc/network/interfaces'], Package['proxmox-ve'] ],
+#  }
 }
