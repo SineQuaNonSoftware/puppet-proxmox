@@ -20,6 +20,9 @@ jobs:
           name: Shell scripts syntax check
           command: for file in $(find files/ -name "*.sh"); do echo $file; bash -n $file || exit 1; done
       - run: 
+          name: Custom facts syntax check
+          command: for file in $(find lib/facter -name "*.rb"); do echo $file; ruby -c $file || exit 1; done
+      - run: 
           name: Check for non-printable characters
           command: grep -I -H -P -n "[\xa0]" --color=yes -r * || tr '\302\102' 'X'
       - run: 
