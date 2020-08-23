@@ -6,7 +6,7 @@ auto vmbr0
 iface vmbr0 inet static
   address <%= @ipaddress %>
   netmask <%= @netmask %>
-  gateway <%= @gateway %>
+  gateway <%= @gatewayv4 %>
   bridge_ports <%= @netdev %>
   bridge_stp off
   bridge_fd 0
