@@ -6,11 +6,15 @@ All notable changes to this project will be documented in this file.
 
 **Features**
 
-Improved documentation.
+Improved documentation and setup TravisCI.
 
 **Bugfixes**
 
+A few linting fixes, thanks to the test suite.
+
 **Known Issues**
+
+No more than before.
 
 ## Release 0.1.0
 
