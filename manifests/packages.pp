@@ -14,9 +14,11 @@ class proxmox::packages {
     location => 'http://download.proxmox.com/debian/pve',
     release  => 'buster',
     repos    => 'pve-no-subscription',
-    notify   => Exec['apt_update']
   }
-~>exec { '/usr/bin/apt full-upgrade -y':
+->Exec['apt_update']
+
+->exec { '/usr/bin/apt full-upgrade -y':
     refreshonly => true,
+    subscribe   => [ Apt::source['proxmox'], Exec['apt_update'] ],
   }
 }
