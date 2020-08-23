@@ -50,7 +50,7 @@ test_script:
 notifications:
   - provider: Email
     to:
-      - nobody@nowhere.com
+      - julien@cornuwel.net
     on_build_success: false
     on_build_failure: false
-    on_build_status_changed: false
+    on_build_status_changed: true
