@@ -22,6 +22,4 @@ class proxmox::packages {
     after       => Exec['apt_update'],
   }
 
-  Class['apt::update'] -> Package <| provider == 'apt' |>
-
 }

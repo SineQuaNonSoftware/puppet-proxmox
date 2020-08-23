@@ -4,6 +4,9 @@
 # - a private bridge network for VMs or CTs without public IPs, but with NAT so they can access the internet
 
 class proxmox::install {
+
+  Class['apt::update'] -> Package <| provider == 'apt' |>
+
   package { 'os-prober':
     ensure => 'absent'
   }
