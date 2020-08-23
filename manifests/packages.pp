@@ -15,10 +15,12 @@ class proxmox::packages {
     release  => 'buster',
     repos    => 'pve-no-subscription',
   }
-->Exec['apt_update']
 
-->exec { '/usr/bin/apt full-upgrade -y':
+~>exec { '/usr/bin/apt full-upgrade -y':
     refreshonly => true,
-    subscribe   => [ Apt::source['proxmox'], Exec['apt_update'] ],
+    after       => Exec['apt_update'],
   }
+
+  Class['apt::update'] -> Package <| provider == 'apt' |>
+
 }
