@@ -17,9 +17,10 @@ class proxmox::packages {
     notify   => Class['apt::update'],
   }
 
-~>exec { '/usr/bin/apt full-upgrade -y':
+~>exec { 'apt-full-upgrade':
+    command     => '/usr/bin/apt full-upgrade -y',
     refreshonly => true,
-    after       => Exec['apt_update'],
+    require     => Exec['apt_update'],
   }
 
 }
