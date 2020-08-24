@@ -63,15 +63,14 @@ There might be some edge cases because our only test machine is based on Hetzner
 It sounds standard enough but maybe other providers put stuff that gets in the way, or Hetzner does something 
 we didn't notice and we need to do it on other servers too...
 
-We didn't write any tests, help with that would be very welcome.
-
 ## Development
 
 Start by submitting an issue that explains what you want to do.
 Branch if you are in the org, fork if you are not. Then, make a pull request.
 
+
 ## Links
 
-https://puppet.com/docs/pdk/latest/pdk_generating_modules.html
-https://puppet.com/docs/puppet/latest/puppet_strings.html
-https://puppet.com/docs/puppet/latest/puppet_strings_style.html
+* https://puppet.com/docs/pdk/latest/pdk_generating_modules.html
+* https://puppet.com/docs/puppet/latest/puppet_strings.html
+* https://puppet.com/docs/puppet/latest/puppet_strings_style.html
