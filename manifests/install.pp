@@ -11,7 +11,8 @@ class proxmox::install {
     ensure => 'absent'
   }
 ->package { ['proxmox-ve', 'postfix', 'open-iscsi']:
-    ensure => 'installed'
+    ensure => 'installed',
+    notify => Reboot['proxmox_install'],
   }
   #TODO Configure Postfix properly, maybe as satellites and have a mail server to handle all our sent mail?
   network::interface { 'vmbr0':
@@ -36,5 +37,9 @@ class proxmox::install {
     post_down    => [
       'iptables -t nat -D POSTROUTING -s \'10.0.1.0/24\' -o vmbr0 -j MASQUERADE',
     ],
+  }
+
+  reboot { 'proxmox_install':
+    apply =>  finished, # Wait until entire catalog is applied before rebooting
   }
 }
