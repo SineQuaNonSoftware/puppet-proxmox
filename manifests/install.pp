@@ -14,13 +14,12 @@ class proxmox::install {
     ensure => 'installed'
   }
   #TODO Configure Postfix properly, maybe as satellites and have a mail server to handle all our sent mail?
-
   network::interface { 'vmbr0':
     family       => 'inet',
     ipaddress    => $::ipaddress,
     netmask      => $::netmask,
-    gateway      => $gatewayv4,
-    bridge_ports => [ $::netdev ],
+    gateway      => $facts['gatewayv4'],
+    bridge_ports => [ $facts['netdev'] ],
     bridge_stp   => 'off',
     bridge_fd    => 0,
   }

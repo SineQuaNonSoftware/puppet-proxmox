@@ -6,3 +6,5 @@ fixtures:
     stdlib: "puppetlabs/stdlib"
     apt:    "puppetlabs/apt"
     reboot: "puppetlabs/reboot"
+    concat: "puppetlabs/concat"
+    network: "example42/network"
