@@ -19,7 +19,7 @@ class proxmox::install {
     family       => 'inet',
     ipaddress    => $::ipaddress,
     netmask      => $::netmask,
-    gateway      => $::gatewayv4,
+    gateway      => $gatewayv4,
     bridge_ports => [ $::netdev ],
     bridge_stp   => 'off',
     bridge_fd    => 0,
