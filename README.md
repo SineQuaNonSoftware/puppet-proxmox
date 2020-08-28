@@ -55,10 +55,10 @@ They have a lot in common, but when you have a specific problem or need, go to P
 include proxmox
 ```
 
-By default, the module creates to bridges/networks for your VMs/CTs:
+By default, the module creates two bridges/networks for your VMs/CTs:
 
 * vmbr0 is the public network, where you can use your additional/failover IPs for your load balancer, firewall, etc... Any public VM needs an interface here.
-* vmbr1 is the private network, for the application/database/backend VMs that don't need to be reached directly from the internet. Connect an interface here and you get:
+* vmbr1 is the private network, for the application/database/backend VMs that don't need to be acessible directly from the internet. Connect an interface here and you get:
   * a private IP (10.0.1.0/24) by DHCP,
   * access to the internet through NAT,
   * local DNS resolution so everyone can find their friends
@@ -66,7 +66,7 @@ By default, the module creates to bridges/networks for your VMs/CTs:
 If you want to add more bridges networks, you'll have to add them using [example42/puppet-network](https://github.com/example42/puppet-network/)'syntax. Here's an example:
 
 ```
-# Private network bridge, ipv4
+# Private network bridge for super-secure VMs
 network::interface { 'vmbr2':
   family       => 'inet',
   address      => '10.0.2.1/24',
@@ -75,10 +75,10 @@ network::interface { 'vmbr2':
   bridge_fd    => 0,
   post_up      => [
     'echo 1 > /proc/sys/net/ipv4/ip_forward',
-    'iptables -t nat -A POSTROUTING -s \'10.0.1.0/24\' -o vmbr0 -j MASQUERADE',
+    'iptables -t nat -A POSTROUTING -s \'10.0.2.0/24\' -o vmbr0 -j MASQUERADE',
   ],
   post_down    => [
-    'iptables -t nat -D POSTROUTING -s \'10.0.1.0/24\' -o vmbr0 -j MASQUERADE',
+    'iptables -t nat -D POSTROUTING -s \'10.0.2.0/24\' -o vmbr0 -j MASQUERADE',
   ],
 }
 ```
