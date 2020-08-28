@@ -19,6 +19,10 @@
     {
       "name": "puppetlabs/apt",
       "version_requirement": ">= 6.2.1 < 7.0.0"
+    },
+    {
+      "name": "example42/network",
+      "version_requirement": ">= 3.5.3"
     }
   ],
   "operatingsystem_support": [

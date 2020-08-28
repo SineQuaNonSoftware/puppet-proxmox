@@ -11,18 +11,38 @@ class proxmox::install {
     ensure => 'absent'
   }
 ->package { ['proxmox-ve', 'postfix', 'open-iscsi']:
-    ensure => 'installed'
+    ensure => 'installed',
+    notify => Reboot['proxmox_install'],
   }
   #TODO Configure Postfix properly, maybe as satellites and have a mail server to handle all our sent mail?
 
-~>file { '/etc/network/interfaces':
-    ensure  => 'present',
-    content => template('proxmox/interfaces.erb'),
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644'
+  # Public network bridge, ipv4
+  network::interface { 'vmbr0':
+    family       => 'inet',
+    ipaddress    => $::ipaddress,
+    netmask      => $::netmask,
+    gateway      => $facts['gatewayv4'],
+    bridge_ports => [ $facts['netdev'] ],
+    bridge_stp   => 'off',
+    bridge_fd    => 0,
   }
-  reboot { '/etc/network/interfaces':
-    subscribe => [ File['/etc/network/interfaces'], Package['proxmox-ve'] ],
+  # Private network bridge, ipv4
+  network::interface { 'vmbr1':
+    family       => 'inet',
+    address      => '10.0.1.1/24',
+    bridge_ports => ['none'],
+    bridge_stp   => 'off',
+    bridge_fd    => 0,
+    post_up      => [
+      'echo 1 > /proc/sys/net/ipv4/ip_forward',
+      'iptables -t nat -A POSTROUTING -s \'10.0.1.0/24\' -o vmbr0 -j MASQUERADE',
+    ],
+    post_down    => [
+      'iptables -t nat -D POSTROUTING -s \'10.0.1.0/24\' -o vmbr0 -j MASQUERADE',
+    ],
+  }
+
+  reboot { 'proxmox_install':
+    apply =>  finished, # Wait until entire catalog is applied before rebooting
   }
 }
