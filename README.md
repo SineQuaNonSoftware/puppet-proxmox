@@ -63,7 +63,9 @@ By default, the module creates two bridges/networks for your VMs/CTs:
   * access to the internet through NAT,
   * local DNS resolution so everyone can find their friends
 
-If you want to add more bridges networks, you'll have to add them using [example42/puppet-network](https://github.com/example42/puppet-network/)'syntax. Here's an example:
+If you want to use the private network, you need at least one VM with an interface on **both** bridges to act as firewall, load balancer, VPN, SSH relay, whatever...
+
+If you want to add more bridges networks, you'll have to use [example42/puppet-network](https://github.com/example42/puppet-network/)'syntax. Here's an example:
 
 ```
 # Private network bridge for super-secure VMs
