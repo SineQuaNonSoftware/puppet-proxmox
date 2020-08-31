@@ -75,3 +75,4 @@ Branch if you are in the org, fork if you are not. Then, make a pull request.
 * https://puppet.com/docs/pdk/latest/pdk_generating_modules.html
 * https://puppet.com/docs/puppet/latest/puppet_strings.html
 * https://puppet.com/docs/puppet/latest/puppet_strings_style.html
+* https://pve.proxmox.com/wiki/Install_Proxmox_VE_on_Debian_Buster
