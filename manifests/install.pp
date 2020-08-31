@@ -14,7 +14,6 @@ class proxmox::install {
     ensure => 'installed',
     notify => Reboot['proxmox_install'],
   }
-  #TODO Configure Postfix properly, maybe as satellites and have a mail server to handle all our sent mail?
 
   # Public network bridge, ipv4
   network::interface { 'vmbr0':
