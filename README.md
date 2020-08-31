@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/SineQuaNonSoftware/puppet-proxmox.svg?branch=master)](https://travis-ci.org/SineQuaNonSoftware/puppet-proxmox)
 
-# proxmox
+# puppet-proxmox
 
-A "one click" Proxmox installation over a fresh Debian install.
+Puppet module handling a full automatic Proxmox installation over a fresh Debian install.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ A "one click" Proxmox installation over a fresh Debian install.
 
 ## Description
 
-The purpose of this module is to provision Proxmox servers at providers who don't offer the option.
+The purpose of this module is to provision Proxmox servers at providers who don't offer it preinstalled.
 You just order a Debian 10, run puppet and voila! You have a default Proxmox server.
 
 We do not plan on adding features for anything that can be done via Proxmox's web interface, command line, terraform... 
@@ -25,9 +25,10 @@ We do not plan on adding features for anything that can be done via Proxmox's we
 
 ### What proxmox affects
 
-The module only does one thing, install Proxmox. But Proxmox itself changes a lot of things during the installation process (just look at how long it takes).
-So, the resulting product of a successful puppet run should no longer be considered as a Debian, but a Proxmox server.
+The module installs and configures a default Proxmox server. Just doing that changes a lot of things during the installation process (just look at how long it takes). The resulting product of a successful puppet run should no longer be considered as a Debian server, but a Proxmox server.
 They have a lot in common, but when you have a specific problem or need, go to Proxmox's documentation first.
+
+**Warning** The module will change your network configuration to create the necessary bridge interfaces for a public and a private VM network in proxmox, change your default kernel and remove the mainline one. Read the code and the documentation, and amend the module for your context where necessary.
 
 ### Setup Requirements
 
@@ -57,11 +58,11 @@ include proxmox
 
 ## Limitations
 
-Debian 10 only. [This is the way](https://pve.proxmox.com/wiki/Install_Proxmox_VE_on_Debian_Buster).
+* Debian 10 only. [This is the way](https://pve.proxmox.com/wiki/Install_Proxmox_VE_on_Debian_Buster).
 
-There might be some edge cases because our only test machine is based on Hetzner's Debian 10.4 minimal amd64 image.
-It sounds standard enough but maybe other providers put stuff that gets in the way, or Hetzner does something 
-we didn't notice and we need to do it on other servers too...
+* Our only test machine is based on Hetzner's Debian 10.4 minimal amd64 image. It looks standard enough but maybe other providers put stuff that gets in the way, or Hetzner does something we didn't notice and we need to do it on other servers too...
+
+* Network setup addresses are fixed for now. They will be parameters in future versions. For now update subnets in https://github.com/SineQuaNonSoftware/puppet-proxmox/blob/master/manifests/install.pp to match your network.
 
 ## Development
 
