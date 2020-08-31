@@ -30,6 +30,8 @@ They have a lot in common, but when you have a specific problem or need, go to P
 
 **Warning** The module will change your network configuration to create the necessary bridge interfaces for a public and a private VM network in proxmox, change your default kernel and remove the mainline one. Read the code and the documentation, and amend the module for your context where necessary.
 
+**Warning** The module will reboot your server once the puppet run is done. This is necessary in order to switch kernel.
+
 ### Setup Requirements
 
 * A clean Debian install
