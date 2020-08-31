@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.2.0
+
+**Features**
+
+* Complete overhaul of the how the module handles the network, using example42/network.
+* Give the user the ability to add more custom bridges/networks.
+
+**Bugfixes**
+
+* Documentation: Explaine how the network is configured and how to work with it and extend it
+
+**Known Issues**
+
+None. Only missing features:
+
+* cloud-init
+* IPv6
+
 ## Release 0.1.1
 
 **Features**
