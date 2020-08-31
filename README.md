@@ -63,7 +63,11 @@ By default, the module creates two bridges/networks for your VMs/CTs:
   * access to the internet through NAT,
   * local DNS resolution so everyone can find their friends
 
-If you want to use the private network, you need at least one VM with an interface on **both** bridges to act as firewall, load balancer, VPN, SSH relay, whatever... This is the only way you can access VMs on the private network outside of a VNC console.
+If you want to use the private network, you need at least one VM with an interface on **both** bridges to act as firewall, load balancer, VPN, SSH relay, whatever... Otherwise, you'll only be able to access VMs on the private network through a VNC console, or with SSH through the physical host, which will pass the key through to the VM:
+
+```
+ssh -J my.physical.host user@10.0.1.1
+```
 
 If you want to add more bridges networks, you'll have to use [example42/puppet-network](https://github.com/example42/puppet-network/)'syntax. Here's an example:
 
@@ -72,16 +76,17 @@ If you want to add more bridges networks, you'll have to use [example42/puppet-n
 network::interface { 'vmbr2':
   family       => 'inet',
   address      => '10.0.2.1/24',
-  bridge_ports => ['none'],
-  bridge_stp   => 'off',
-  bridge_fd    => 0,
-  post_up      => [
-    'echo 1 > /proc/sys/net/ipv4/ip_forward',
-    'iptables -t nat -A POSTROUTING -s \'10.0.2.0/24\' -o vmbr0 -j MASQUERADE',
-  ],
-  post_down    => [
-    'iptables -t nat -D POSTROUTING -s \'10.0.2.0/24\' -o vmbr0 -j MASQUERADE',
-  ],
+# Uncomment if the subnet needs access to others through the public bridge
+#   bridge_ports => ['none'],
+#   bridge_stp   => 'off',
+#   bridge_fd    => 0,
+#   post_up      => [
+#     'echo 1 > /proc/sys/net/ipv4/ip_forward',
+#     'iptables -t nat -A POSTROUTING -s \'10.0.2.0/24\' -o vmbr0 -j MASQUERADE',
+#   ],
+#   post_down    => [
+#     'iptables -t nat -D POSTROUTING -s \'10.0.2.0/24\' -o vmbr0 -j MASQUERADE',
+#   ],
 }
 ```
 
