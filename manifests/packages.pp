@@ -3,7 +3,7 @@
 class proxmox::packages {
   file { '/etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg':
     ensure => 'present',
-    source => 'http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg',
+    source => 'http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg', # Proxmox doesn't provide a proper https path to their gpg key
     owner  => 'root',
     group  => 'root',
     mode   => '0644'
@@ -11,7 +11,7 @@ class proxmox::packages {
 ->apt::source { 'proxmox':
     ensure   => 'present',
     comment  => 'This is the proxmox stable repo',
-    location => 'http://download.proxmox.com/debian/pve',
+    location => 'http://download.proxmox.com/debian/pve', # Proxmox doesn't provide a proper https repo either
     release  => 'buster',
     repos    => 'pve-no-subscription',
     notify   => Class['apt::update'],
