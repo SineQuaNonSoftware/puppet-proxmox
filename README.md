@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/SineQuaNonSoftware/puppet-proxmox.svg?branch=master)](https://travis-ci.org/SineQuaNonSoftware/puppet-proxmox)
 
-# puppet-proxmox
+# proxmox
 
 Puppet module handling a full automatic Proxmox installation over a fresh Debian install.
 
