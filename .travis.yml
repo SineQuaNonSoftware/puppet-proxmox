@@ -44,7 +44,7 @@ jobs:
         secure: STkil5yEa/XwY0WAVtMlJ8jN/vSeoFeKuO4jPozF1tc1PlOKmRBgEhyPqTu2SHeCeW5Fp1mG6wFslvkc5YpEy6cCg+QFupnjDSZCH7kRJOKNgwKuffvIlShQGthDKBkPC93HA6M/rnq8ehKGxLhGSUhB6N7+rq7ex3goMNAZm6zeNhtFQGRvxk2YVeynVAHuDpaTJbisKuQyAGXgikCpTyZt6WaVPj6y4p5zWcMOJwQgdiEkU8at3sTZL5DtJPT7cah7hoZoUF8M2G7NHlgOPoY0TN3yqJSpr1nANqhjORZIRNXnSmy6iCaubQDwinTeCKr48nawNNIEUZ1xcudZNSw9UVxlWLOsSz3VHVXl+6Z+uVmdDGJrnlG+jmsrkJd0EmxvU7wTzGBU3BQSvbwhdiksL4/9APUt2MtqMMYIOp+0yJMxBxWJE2CutuFbogVghiET3fSPFdBX/Thl3NwT8DYubJHrrNug58mT5uUP31Lywm1d36N5n/jCAiGJTQK8iBfjGduJIA4jXSQ8N1Wog3z1oz+D03KOVSGfloLMhLD+pjrrpl08uwFMkc1Y6tWTJlXz97IMg+PfT7TAHaz/MSd+IBFjVVnFbFxxd84mhb7N1so2qI5HHQAZU4csec+jEe+cwUvD0IBGWi245bfu9F5ij5vMd8KaiEKL4FjZeWI=
 branches:
   only:
-  - master
-  - "/^v\\d/"
+  - gh-pages
+  - /.*/
 notifications:
   email: false
