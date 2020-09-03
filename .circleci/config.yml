@@ -4,12 +4,15 @@ jobs:
   build:
     working_directory: ~/proxmox
     docker:
-      - image: puppet/pdk
+      - image: circleci/ruby:2.5.7-buster # for Puppet 6
     steps:
       - checkout
+      - run:
+          name: Install latest puppet 6
+          command: gem install puppet && puppet puppet --version
       - run: 
-          name: Get Ruby/Gem/Puppet version for this run
-          command: ruby --version && gem -V && puppet --version
+          name: Get Ruby/Gem/Puppet versions for this run
+          command: ruby --version && echo -n 'gem ' && gem --version && puppet --version
 #      - run: 
 #          name: Puppet files syntax check
 #          command: for file in $(find manifests/ -name '*.pp'); do echo $file; puppet parser validate $file || exit 1; done
