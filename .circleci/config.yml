@@ -35,15 +35,12 @@ jobs:
         paths:
           - vendor/bundle
 
-      - run:
-          name: Install latest puppet 6
-          command:  gem install puppet
       - run: 
           name: Get Ruby/Gem/Puppet versions for this run
           command: ruby --version && echo -n 'gem ' && gem --version && echo -n 'puppet ' && puppet --version
       - run:
           name: Syntax checks
-          command: rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
+          command: bundle exec rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
 #      - run: 
 #          name: Puppet files syntax check
 #          command: for file in $(find manifests/ -name '*.pp'); do echo $file; puppet parser validate $file || exit 1; done
