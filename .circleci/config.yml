@@ -4,18 +4,18 @@ orbs:
   bits-puppet: broadinstitute/bits-puppet@0.1.1
 
 executors:
-  my-executor: bits-puppet/ruby_puppet
+  puppet5: bits-puppet/ruby_puppet
+    puppet_version: '< 6.0.0'
+    ruby_version: '2.4.5'
+  puppet6: bits-puppet/ruby_puppet
+    puppet_version: '< 7.0.0'
+    ruby_version: '2.5.7'
 
 workflows:
   build_and_publish:
     jobs:
       - bits-puppet/static:
-          parameters:
-            puppet_version: < 6.0.0
-            ruby_version: 2.4.5
       - bits-puppet/run-tests:
-          puppet_version: < 6.0.0
-          ruby_version: 2.4.5
           requires:
             - bits-puppet/static
       - bits-puppet/deploy:
