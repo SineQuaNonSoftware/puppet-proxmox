@@ -6,7 +6,7 @@ jobs:
   build:
     working_directory: ~/proxmox
     docker:
-      - image: circleci/ruby:2.4.5-buster # Puppet 5 is packaged bundled with that version of ruby
+      - image: circleci/ruby:2.4.5 # Puppet 5 is packaged bundled with that version of ruby
         environment: 
           PUPPET_GEM_VERSION: "~> 5.0"
     steps:
