@@ -20,7 +20,7 @@ jobs:
         name: Restore bundle cache
         keys:
           # when lock file changes, use increasingly general patterns to restore cache
-          - puppet-proxmox-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          - puppet-proxmox-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile" }}
           - puppet-proxmox-{{ arch }}-{{ .Branch }}-
           - puppet-proxmox-{{ arch }}-
 
@@ -31,7 +31,7 @@ jobs:
       # Cache Dependencies
       - type: cache-save
         name: Store bundle cache
-        key: puppet-proxmox-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        key: puppet-proxmox-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile" }}
         paths:
           - vendor/bundle
 
