@@ -6,10 +6,10 @@ orbs:
 
 workflows:
   build_and_deploy:
-    - static
-    - run-tests:
+    - bits-puppet/static
+    - bits-puppet/run-tests:
         requires:
-          - static
-    - deploy:
+          - bits-puppet/static
+    - bits-puppet/deploy:
         requires:
-          - run-tests    
+          - bits-puppet/run-tests    
