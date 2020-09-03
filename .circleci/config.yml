@@ -1,8 +1,7 @@
 ---
 version: 2
 jobs:
-  # This is the version of puppet that comes with a fresh Debian Buster. Since this is a pre-requisite of our module,
-  # we only to validate against that version (until I can figure out CircleCi's parallel workflows...)
+  # This is the version of puppet that comes with a fresh Debian Buster. So we need to test for it.
   build:
     working_directory: ~/proxmox
     docker:
@@ -22,8 +21,8 @@ jobs:
         keys:
           # when lock file changes, use increasingly general patterns to restore cache
           - puppet5-proxmox-{ .Branch }}-{{ checksum "Gemfile" }}
-          - puppet5-proxmox-{ .Branch }}-
-          - puppet5-proxmox-
+          - puppet5-proxmox-{ .Branch }}
+          - puppet5-proxmox
       # Bundle install dependencies
       - run: bundle install
       - run: bundle clean
@@ -31,7 +30,47 @@ jobs:
       # Cache Dependencies
       - type: cache-save
         name: Store bundle cache
-        key: puppet-proxmox-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile" }}
+        key: puppet5-proxmox-{ .Branch }}-{{ checksum "Gemfile" }}
+        paths:
+          - vendor/bundle
+
+      - run: 
+          name: Get Ruby/Gem/Puppet versions for this run
+          command: ruby --version && echo -n 'gem ' && gem --version && echo -n 'puppet ' && bundle exec puppet --version
+      - run:
+          name: Syntax checks
+          command: bundle exec rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
+
+  # In case the user adds puppetlabs repo and installs puppet 6 manually, we need to make sure it still works
+  build6:
+    working_directory: ~/proxmox
+    docker:
+      - image: circleci/ruby:2.5.7 # Puppet 6 is packaged bundled with that version of ruby
+        environment: 
+          PUPPET_GEM_VERSION: "~> 6.0"
+    steps:
+      - checkout
+
+      # Setup bundler and display all versions
+      - run: gem install bundler
+      - run: bundle config --local path "vendor/bundle"
+
+      # Restore Cached Dependencies
+      - type: cache-restore
+        name: Restore bundle cache
+        keys:
+          # when lock file changes, use increasingly general patterns to restore cache
+          - puppet6-proxmox-{{ .Branch }}-{{ checksum "Gemfile" }}
+          - puppet6-proxmox-{{ .Branch }}
+          - puppet6-proxmox
+      # Bundle install dependencies
+      - run: bundle install
+      - run: bundle clean
+
+      # Cache Dependencies
+      - type: cache-save
+        name: Store bundle cache
+        key: puppet6-proxmox-{{ .Branch }}-{{ checksum "Gemfile" }}
         paths:
           - vendor/bundle
 
@@ -48,3 +87,4 @@ workflows:
   check_and_deploy:
     jobs:
       - build
+      - build6
