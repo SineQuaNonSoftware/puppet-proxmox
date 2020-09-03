@@ -8,10 +8,11 @@ executors:
 
 workflows:
   build_and_publish:
-    - bits-puppet/static
-    - bits-puppet/run-tests:
-        requires:
-          - bits-puppet/static
-     - bits-puppet/deploy:
-         requires:
-           - bits-puppet/run-tests
+    jobs:
+      - bits-puppet/static
+      - bits-puppet/run-tests:
+          requires:
+            - bits-puppet/static
+      - bits-puppet/deploy:
+          requires:
+            - bits-puppet/run-tests
