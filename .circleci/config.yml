@@ -3,3 +3,9 @@ version: 2.1
 
 orbs:
   bits-puppet: broadinstitute/bits-puppet@0.1.1
+
+workflows:
+  build_and_deploy:
+    - static
+    - run-tests
+    - deploy    
