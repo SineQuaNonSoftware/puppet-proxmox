@@ -6,17 +6,17 @@ orbs:
 
 jobs:
   bits-puppet/static:
-  bits-puppet/run-tests:
-    puppet_version: < 6.0.0
-    ruby_version: 2.4.5
-# bits-puppet/deploy:
+#  bits-puppet/run-tests:
+#    puppet_version: < 6.0.0
+#    ruby_version: 2.4.5
+## bits-puppet/deploy:
 
 workflows:
   build_and_deploy:
     - bits-puppet/static
-    - bits-puppet/run-tests:
-        requires:
-          - bits-puppet/static
+#    - bits-puppet/run-tests:
+#        requires:
+#          - bits-puppet/static
 #     - bits-puppet/deploy:
 #         requires:
 #           - bits-puppet/run-tests    
