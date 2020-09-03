@@ -12,7 +12,7 @@ jobs:
           command: gem install puppet
       - run: 
           name: Get Ruby/Gem/Puppet versions for this run
-          command: ruby --version && echo -n 'gem ' && gem --version && puppet --version
+          command: ruby --version && echo -n 'gem ' && gem --version && && echo -n 'puppet ' puppet --version
 #      - run: 
 #          name: Puppet files syntax check
 #          command: for file in $(find manifests/ -name '*.pp'); do echo $file; puppet parser validate $file || exit 1; done
