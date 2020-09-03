@@ -13,7 +13,6 @@ jobs:
       # Setup bundler and display all versions
       - run: gem install bundler
       - run: bundle config --local path "vendor/bundle"
-      - run: ruby -v && gem -v && bundle -v
 
       # Restore Cached Dependencies
       - type: cache-restore
