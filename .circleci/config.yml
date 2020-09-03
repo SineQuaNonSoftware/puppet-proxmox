@@ -5,7 +5,9 @@ orbs:
   bits-puppet: broadinstitute/bits-puppet@0.1.1
 
 jobs:
-  bits-puppet/static:
+  build:
+    steps:
+      - bits-puppet/static:
 #  bits-puppet/run-tests:
 #    puppet_version: < 6.0.0
 #    ruby_version: 2.4.5
@@ -13,7 +15,7 @@ jobs:
 
 workflows:
   build:
-    - bits-puppet/static
+    - build
 #    - bits-puppet/run-tests:
 #        requires:
 #          - bits-puppet/static
