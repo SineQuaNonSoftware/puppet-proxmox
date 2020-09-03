@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Install latest puppet 6
-          command: gem install puppet && puppet puppet --version
+          command: gem install puppet
       - run: 
           name: Get Ruby/Gem/Puppet versions for this run
           command: ruby --version && echo -n 'gem ' && gem --version && puppet --version
