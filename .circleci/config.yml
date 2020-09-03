@@ -3,7 +3,7 @@ version: 2
 jobs:
   # This is the version of puppet that comes with a fresh Debian Buster. Since this is a pre-requisite of our module,
   # we only to validate against that version (until I can figure out CircleCi's parallel workflows...)
-  check_for_puppet5:
+  build:
     working_directory: ~/proxmox
     docker:
       - image: circleci/ruby:2.4.5-buster # Puppet 5 is packaged bundled with that version of ruby
@@ -41,9 +41,10 @@ jobs:
       - run:
           name: Syntax checks
           command: bundle exec rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
+
 workflows:
   version: 2
 
   check_and_deploy:
     jobs:
-      - check_for_puppet5
+      - build
