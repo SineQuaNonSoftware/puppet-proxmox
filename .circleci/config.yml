@@ -11,9 +11,9 @@ jobs:
 #    ruby_version: 2.4.5
 ## bits-puppet/deploy:
 
-workflows:
-  build_and_deploy:
-    - bits-puppet/static
+#workflows:
+#  build_and_deploy:
+#    - bits-puppet/static
 #    - bits-puppet/run-tests:
 #        requires:
 #          - bits-puppet/static
