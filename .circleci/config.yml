@@ -41,3 +41,9 @@ jobs:
       - run:
           name: Syntax checks
           command: bundle exec rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
+workflows:
+  version: 2
+
+  check_and_deploy:
+    jobs:
+      - check_for_puppet5
