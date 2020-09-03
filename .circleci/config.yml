@@ -9,7 +9,7 @@ executors:
 workflows:
   build_and_publish:
     jobs:
-      - bits-puppet/static:
+      - bits-puppet/static
       - bits-puppet/run-tests:
           requires:
             - bits-puppet/static
