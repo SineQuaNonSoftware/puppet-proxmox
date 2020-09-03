@@ -5,11 +5,39 @@ jobs:
     working_directory: ~/proxmox
     docker:
       - image: circleci/ruby:2.5.7-buster # Puppet 6 is packaged bundled with that version of ruby
+        environment: 
+          PUPPET_GEM_VERSION: "~> 6.0"
     steps:
       - checkout
+
+      # Setup bundler and display all versions
+      - run: gem install bundler
+      - run: bundle config --local path "vendor/bundle"
+      - run: ruby -v && gem -v && bundle -v
+
+      # Restore Cached Dependencies
+      - type: cache-restore
+        name: Restore bundle cache
+        keys:
+          # when lock file changes, use increasingly general patterns to restore cache
+          - puppet-proxmox-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          - puppet-proxmox-{{ arch }}-{{ .Branch }}-
+          - puppet-proxmox-{{ arch }}-
+
+      # Bundle install dependencies
+      - run: bundle install
+      - run: bundle clean
+
+      # Cache Dependencies
+      - type: cache-save
+        name: Store bundle cache
+        key: puppet-proxmox-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
       - run:
           name: Install latest puppet 6
-          command: gem install puppet
+          command:  gem install puppet
       - run: 
           name: Get Ruby/Gem/Puppet versions for this run
           command: ruby --version && echo -n 'gem ' && gem --version && echo -n 'puppet ' && puppet --version
