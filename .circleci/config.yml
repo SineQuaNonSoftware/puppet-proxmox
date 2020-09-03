@@ -7,5 +7,9 @@ orbs:
 workflows:
   build_and_deploy:
     - static
-    - run-tests
-    - deploy    
+    - run-tests:
+        requires:
+          - static
+    - deploy:
+        requires:
+          - run-tests    
