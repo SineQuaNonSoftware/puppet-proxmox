@@ -40,7 +40,6 @@ jobs:
       - run:
           name: Syntax checks
           command: bundle exec rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
-
   puppet5:
     working_directory: ~/proxmox
     docker:
@@ -85,7 +84,7 @@ workflows:
     jobs:
       - puppet5
       - puppet6
-      
+
 #      - run: 
 #          name: Puppet files syntax check
 #          command: for file in $(find manifests/ -name '*.pp'); do echo $file; puppet parser validate $file || exit 1; done
