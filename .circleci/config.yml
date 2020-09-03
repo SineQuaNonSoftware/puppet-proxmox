@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/proxmox
     docker:
-      - image: puppet-pdk
+      - image: puppet/pdk
     steps:
       - checkout
       - run: 
