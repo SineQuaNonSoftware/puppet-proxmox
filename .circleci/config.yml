@@ -16,3 +16,7 @@ workflows:
       - bits-puppet/deploy:
           requires:
             - bits-puppet/run-tests
+          filters:
+            branches:
+              only:
+                - master
