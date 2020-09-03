@@ -4,12 +4,19 @@ version: 2.1
 orbs:
   bits-puppet: broadinstitute/bits-puppet@0.1.1
 
+jobs:
+  bits-puppet/static:
+  bits-puppet/run-tests:
+    puppet_version: < 6.0.0
+    ruby_version: 2.4.5
+# bits-puppet/deploy:
+
 workflows:
   build_and_deploy:
     - bits-puppet/static
     - bits-puppet/run-tests:
         requires:
           - bits-puppet/static
-    - bits-puppet/deploy:
-        requires:
-          - bits-puppet/run-tests    
+#     - bits-puppet/deploy:
+#         requires:
+#           - bits-puppet/run-tests    
