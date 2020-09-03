@@ -10,8 +10,9 @@ workflows:
   build_and_publish:
     jobs:
       - bits-puppet/static:
-          puppet_version: < 6.0.0
-          ruby_version: 2.4.5
+          parameters:
+            puppet_version: < 6.0.0
+            ruby_version: 2.4.5
       - bits-puppet/run-tests:
           puppet_version: < 6.0.0
           ruby_version: 2.4.5
