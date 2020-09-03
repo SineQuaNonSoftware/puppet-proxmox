@@ -5,11 +5,6 @@ orbs:
 
 executors:
   puppet5: bits-puppet/ruby_puppet
-    puppet_version: '< 6.0.0'
-    ruby_version: '2.4.5'
-  puppet6: bits-puppet/ruby_puppet
-    puppet_version: '< 7.0.0'
-    ruby_version: '2.5.7'
 
 workflows:
   build_and_publish:
