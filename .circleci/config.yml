@@ -1,5 +1,5 @@
 ---
-version: 2.1
+version: 2
 jobs:
   # This is the version of puppet that comes with a fresh Debian Buster. Since this is a pre-requisite of our module,
   # we only to validate against that version (until I can figure out CircleCi's parallel workflows...)
