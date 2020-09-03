@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/proxmox
     docker:
-      - image: circleci/ruby:2.5.7-buster # for Puppet 6
+      - image: circleci/ruby:2.5.7-buster # Puppet 6 is packaged bundled with that version of ruby
     steps:
       - checkout
       - run:
