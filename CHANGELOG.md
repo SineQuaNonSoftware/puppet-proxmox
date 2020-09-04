@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.2.2
+
+**Features**
+
+* Fully automated CI workflow with validation of the module for Puppet 5 & 6 and automatic publication to the Forge.
+* Add a badge to the [Homepage](https://github.com/SineQuaNonSoftware/puppet-proxmox) to show off our Github Actions CI/CD workflow ;-)
+
+**Bugfixes**
+
+None
+
+**Known Issues**
+
+None
+
 ## Release 0.2.1
 
 **Features**
