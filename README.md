@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/SineQuaNonSoftware/puppet-proxmox.svg?branch=master)](https://travis-ci.org/SineQuaNonSoftware/puppet-proxmox)
-
+[![Actions Status](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/syntax/badge.svg)](https://github.com/SineQuaNonSoftware/puppet-proxmox/actions)
 # proxmox
 
 Puppet module handling a full automatic Proxmox installation over a fresh Debian install.
