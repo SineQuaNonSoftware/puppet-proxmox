@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     container: ruby:2.4.5
     steps:
+      - uses: actions/checkout@v1
       - name: Install bundler
         run: gem install bundler
       - name: Display the versions used
