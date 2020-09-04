@@ -1,4 +1,6 @@
-[![Actions Status](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/build_puppet6/badge.svg)](https://github.com/SineQuaNonSoftware/puppet-proxmox/actions)
+![Syntax checks for puppet 5](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/Syntax%20checks%20for%20puppet%205/badge.svg)
+![Syntax checks for puppet 6](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/Syntax%20checks%20for%20puppet%206/badge.svg)
+
 # proxmox
 
 Puppet module handling a full automatic Proxmox installation over a fresh Debian install.
