@@ -24,6 +24,8 @@ jobs:
           bundle config path vendor/bundle
           bundle config set without 'system_tests'
           bundle install --jobs $(nproc) --retry 3
+      - names: Is puppet installed?
+        run: bundle exec puppet --version || true
       - name: Syntax check
         run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
       - name: Test suite
