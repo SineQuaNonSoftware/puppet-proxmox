@@ -1,4 +1,4 @@
-name: Module validation for Puppet 5 and 6
+name: Valid for Puppet 5 and 6 and published on the Forge
 on: [push, pull_request]
 
 jobs:
