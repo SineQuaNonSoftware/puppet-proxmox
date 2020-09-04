@@ -4,7 +4,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ruby:2.4.5-buster
+    container: ruby:2.4.5
     steps:
       - name: Install bundler
         run: gem install bundler
