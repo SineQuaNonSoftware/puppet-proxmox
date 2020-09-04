@@ -3,8 +3,11 @@ on: [push, pull_request]
 
 jobs:
   build:
+    name: Test for Puppet 5
     runs-on: ubuntu-latest
     container: ruby:2.4.5
+    env:
+      PUPPET_GEM_VERSION: '~> 5'
     steps:
       - uses: actions/checkout@v1
       - name: Install bundler
@@ -24,8 +27,7 @@ jobs:
           bundle config path vendor/bundle
           bundle config set without 'system_tests'
           bundle install --jobs $(nproc) --retry 3
-      - name: Is puppet installed?
-        run: bundle exec puppet --version || true
+      - run: bundle exec puppet --version
       - name: Syntax check
         run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
       - name: Test suite
