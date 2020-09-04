@@ -1,33 +1,22 @@
----
-version: 2
-jobs:
-  build:
-    working_directory: ~/puppet
-    docker:
-      - image: puppet/puppetserver
-    steps:
-      - checkout
-      - run: 
-          name: Get Puppet version for this run
-          command: puppet --version
-      - run: 
-          name: Puppet files syntax check
-          command: for file in $(find manifests/ -name '*.pp'); do echo $file; puppet parser validate $file || exit 1; done
-      - run: 
-          name: ERB files syntax check
-          command: for file in $(find templates/ -name "*.erb"); do echo $file; erb -P -x -T - "${file}" || exit 1; done
-      - run: 
-          name: Shell scripts syntax check
-          command: for file in $(find files/ -name "*.sh"); do echo $file; bash -n $file || exit 1; done
-      - run: 
-          name: Custom facts syntax check
-          command: for file in $(find lib/facter -name "*.rb"); do echo $file; ruby -c $file || exit 1; done
-      - run: 
-          name: Check for non-printable characters
-          command: grep -I -H -P -n "[\xa0]" --color=yes -r * || tr '\302\102' 'X'
-      - run: 
-          name: Install puppet-lint
-          command: gem install puppet-lint
-      - run: 
-          name: Puppet lint; only clean code in our Org ;-)
-          command: ret=0; for file in $(find manifests/ -name '*.pp'); do echo $file; puppet-lint --fail-on-warnings --no-140chars-check $file || ret=1; done; exit $ret
+version: 2.1
+
+orbs:
+  bits-puppet: broadinstitute/bits-puppet@0.1.1
+
+executors:
+  puppet5: bits-puppet/ruby_puppet
+
+workflows:
+  build_and_publish:
+    jobs:
+      - bits-puppet/static
+      - bits-puppet/run-tests:
+          requires:
+            - bits-puppet/static
+      - bits-puppet/deploy:
+          requires:
+            - bits-puppet/run-tests
+          filters:
+            branches:
+              only:
+                - master
