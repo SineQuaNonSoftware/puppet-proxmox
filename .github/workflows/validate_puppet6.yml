@@ -1,38 +1,7 @@
-name: Syntax checks
+name: Syntax checks for puppet 6
 on: [push, pull_request]
 
 jobs:
-  build:
-    name: Validate for Puppet 5
-    runs-on: ubuntu-latest
-    container: ruby:2.4.5
-    env:
-      PUPPET_GEM_VERSION: '~> 5'
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install bundler
-        run: gem install bundler
-      - name: Display the versions used
-        run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
-      - name: Force update gems
-        run: rm Gemfile.lock || true
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ruby-2.4.5-gems-${{ hashFiles('**/Gemfile') }}
-          restore-keys: |
-            ruby-2.4.5-gems-
-      - name: Install/update dependencies
-        run: |
-          bundle config path vendor/bundle
-          bundle config set without 'system_tests'
-          bundle install --jobs $(nproc) --retry 3
-      - run: bundle exec puppet --version
-      - name: Syntax check
-        run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
-      - name: Test suite
-        run: bundle exec rake parallel_spec
-
   build:
     name: Validate for Puppet 6
     runs-on: ubuntu-latest
