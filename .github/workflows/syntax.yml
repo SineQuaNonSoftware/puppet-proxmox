@@ -17,3 +17,5 @@ jobs:
         run: bundle install --without system_tests --path /github/workspace/gems --jobs $(nproc)
       - name: Syntax check
         run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
+      - name: Test suite
+        run: bundle exec rake parallel_spec
