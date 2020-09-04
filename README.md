@@ -1,8 +1,4 @@
-![Syntax checks for puppet 5](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/Syntax%20checks%20for%20puppet%205/badge.svg)
-
-![Syntax checks for puppet 6](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/Syntax%20checks%20for%20puppet%206/badge.svg)
-
-![Build and publish to Puppet Forge](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/Build%20and%20publish%20to%20Puppet%20Forge/badge.svg)
+![Valid for Puppet 5 and 6 and published on the Forge](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/Valid%20for%20Puppet%205%20and%206%20and%20published%20on%20the%20Forge/badge.svg)
 
 # proxmox
 
