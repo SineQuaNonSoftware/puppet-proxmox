@@ -2,11 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.2.1
+
+**Features**
+
+* Complete CI/CD with Github Actions:
+  * Validates against Puppet 5 and 6, with their respective bundled Ruby versions
+  * Automatically pushes to the Forge when a version is tagged
+
+**Bugfixes**
+
+None
+
+**Known Issues**
+
+None
+
 ## Release 0.2.0
 
 **Features**
 
-* Complete overhaul of the how the module handles the network, using example42/network.
+* Complete overhaul of how the module handles the network, using example42/network.
 * Give the user the ability to add more custom bridges/networks.
 
 **Bugfixes**
