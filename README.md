@@ -106,6 +106,23 @@ network::interface { 'vmbr2':
 Start by submitting an issue that explains what you want to do.
 Branch if you are in the org, fork if you are not. Then, make a pull request.
 
+## Deploy a new release
+
+After the feature branches have been merged and you are happy with the state of 'master',
+it's time to release the module to the Forge, remember we use [SemVer](https://semver.org/)...
+
+* Create a branch from master and update:
+  * CHANGELOG.md
+  * metadata.json
+* Create a Pull Request
+* The person who merges the PR has a little CLI work to do:
+
+```
+git checkout master
+git pull
+git tag X.Y.Z
+git push --tags
+```
 
 ## Links
 
