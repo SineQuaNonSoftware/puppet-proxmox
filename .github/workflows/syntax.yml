@@ -10,3 +10,9 @@ jobs:
         run: gem install bundler
       - name: Display the versions used
         run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
+      - name: Force update gems
+        run: rm Gemfile.lock || true
+      - name: Install dependencies
+        run: bundle install --without system_tests --path /github/workspace/gems --jobs $(nproc)
+      - name: Syntax check
+        run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
