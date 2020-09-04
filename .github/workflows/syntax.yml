@@ -1,0 +1,12 @@
+name: Syntax checks
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ruby:2.4.5-buster
+    steps:
+      - name: Install bundler
+        run: gem install bundler
+      - name: Display the versions used
+        run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
