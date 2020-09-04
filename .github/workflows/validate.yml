@@ -1,4 +1,4 @@
-name: Syntax checks for puppet 5
+name: Module validation for Puppet 5 and 6
 on: [push, pull_request]
 
 jobs:
