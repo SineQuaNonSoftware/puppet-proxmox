@@ -15,6 +15,17 @@ class proxmox::install {
     notify => Reboot['proxmox_install'],
   }
 
+  diff --git a/manifests/install.pp b/manifests/install.pp
+index ceb4e54..bce0132 100644
+--- a/manifests/install.pp
++++ b/manifests/install.pp
+@@ -16,6 +16,9 @@ class proxmox::install {
+   }
+   #TODO Configure Postfix properly, maybe as satellites and have a mail server to handle all our sent mail?
+  class { 'network':
+    config_file_per_interface => true,
+  }
+
   # Public network bridge, ipv4
   network::interface { 'vmbr0':
     family       => 'inet',
