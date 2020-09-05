@@ -5,62 +5,60 @@ jobs:
   build_puppet5:
     name: Validate for Puppet 5
     runs-on: ubuntu-latest
-    container: ruby:2.4.5
     env:
       PUPPET_GEM_VERSION: '~> 5'
     steps:
-      - uses: actions/checkout@v1
-      - name: Install bundler
-        run: gem install bundler
-      - name: Display the versions used
-        run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
-      - name: Force update gems
-        run: rm Gemfile.lock || true
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ruby-2.4.5-gems-${{ hashFiles('**/Gemfile') }}
-          restore-keys: |
-            ruby-2.4.5-gems-
-      - name: Install/update dependencies
-        run: |
-          bundle config path vendor/bundle
-          bundle config set without 'system_tests'
-          bundle install --jobs $(nproc) --retry 3
-      - name: Syntax check
-        run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
-      - name: Test suite
-        run: bundle exec rake parallel_spec
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.4.5
+    - name: Display the versions used
+      run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
+    - name: Cache gem bundle
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ruby-2.4.5-gems-${{ hashFiles('**/Gemfile') }}
+        restore-keys: |
+          ruby-2.4.5-gems-
+    - name: Install/update dependencies
+      run: |
+        bundle config path vendor/bundle
+        bundle config set without 'system_tests'
+        bundle install --jobs $(nproc) --retry 3
+    - name: Syntax check
+      run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
+    - name: Test suite
+      run: bundle exec rake parallel_spec
 
   build_puppet6:
     name: Validate for Puppet 6
     runs-on: ubuntu-latest
-    container: ruby:2.5.7
     env:
       PUPPET_GEM_VERSION: '~> 6'
     steps:
-      - uses: actions/checkout@v1
-      - name: Install bundler
-        run: gem install bundler
-      - name: Display the versions used
-        run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
-      - name: Force update gems
-        run: rm Gemfile.lock || true
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ruby-2.5.7-gems-${{ hashFiles('**/Gemfile') }}
-          restore-keys: |
-            ruby-2.5.7-gems-
-      - name: Install/update dependencies
-        run: |
-          bundle config path vendor/bundle
-          bundle config set without 'system_tests'
-          bundle install --jobs $(nproc) --retry 3
-      - name: Syntax check
-        run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
-      - name: Test suite
-        run: bundle exec rake parallel_spec
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.5.7
+    - name: Display the versions used
+      run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
+    - name: Cache gem bundle
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ruby-2.5.7-gems-${{ hashFiles('**/Gemfile') }}
+        restore-keys: |
+          ruby-2.5.7-gems-
+    - name: Install/update dependencies
+      run: |
+        bundle config path vendor/bundle
+        bundle config set without 'system_tests'
+        bundle install --jobs $(nproc) --retry 3
+    - name: Syntax check
+      run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
+    - name: Test suite
+      run: bundle exec rake parallel_spec
 
   build_forge:
     name: Build and publish to Puppet Forge
@@ -77,7 +75,7 @@ jobs:
         fi
     - name: Clone repository
       if: steps.check-tag.outputs.match == 'true'
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       with:
         ref: ${{ env.RELEASE_VERSION }}
     - name: Build and publish module
