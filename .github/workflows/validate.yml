@@ -14,8 +14,6 @@ jobs:
         run: gem install bundler
       - name: Display the versions used
         run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
-      - name: Force update gems
-        run: rm Gemfile.lock || true
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
@@ -44,8 +42,6 @@ jobs:
         run: gem install bundler
       - name: Display the versions used
         run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
-      - name: Force update gems
-        run: rm Gemfile.lock || true
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
