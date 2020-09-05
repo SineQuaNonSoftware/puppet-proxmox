@@ -14,7 +14,8 @@ jobs:
         run: gem install bundler
       - name: Display the versions used
         run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
-      - uses: actions/cache@v2
+      - name: Cache gem bundle
+        uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ruby-2.4.5-gems-${{ hashFiles('**/Gemfile') }}
@@ -42,7 +43,8 @@ jobs:
         run: gem install bundler
       - name: Display the versions used
         run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
-      - uses: actions/cache@v2
+      - name: Cache gem bundle
+        uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ruby-2.5.7-gems-${{ hashFiles('**/Gemfile') }}
