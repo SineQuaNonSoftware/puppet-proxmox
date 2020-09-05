@@ -12,25 +12,23 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.4.5
-    - name: Install bundler
-      run: gem install bundler
     - name: Display the versions used
       run: ruby --version && echo -n 'gem ' && gem --version && bundle --version && which ruby
-#      - name: Cache gem bundle
-#        uses: actions/cache@v2
-#        with:
-#          path: /usr/local/bundle
-#          key: ruby-2.4.5-gems-${{ hashFiles('**/Gemfile') }}
-#          restore-keys: |
-#            ruby-2.4.5-gems-
-#      - name: Install/update dependencies
-#        run: |
-#          bundle config set without 'system_tests'
-#          bundle install --jobs $(nproc) --retry 3
-#      - name: Syntax check
-#        run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
-#      - name: Test suite
-#        run: bundle exec rake parallel_spec
+    - name: Cache gem bundle
+      uses: actions/cache@v2
+      with:
+        path: /usr/local/bundle
+        key: ruby-2.4.5-gems-${{ hashFiles('**/Gemfile') }}
+        restore-keys: |
+          ruby-2.4.5-gems-
+    - name: Install/update dependencies
+      run: |
+        bundle config set without 'system_tests'
+        bundle install --jobs $(nproc) --retry 3
+    - name: Syntax check
+      run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
+    - name: Test suite
+      run: bundle exec rake parallel_spec
 #
 #  build_puppet6:
 #    name: Validate for Puppet 6
