@@ -13,16 +13,17 @@ jobs:
       with:
         ruby-version: 2.4.5
     - name: Display the versions used
-      run: ruby --version && echo -n 'gem ' && gem --version && bundle --version && which ruby
+      run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
     - name: Cache gem bundle
       uses: actions/cache@v2
       with:
-        path: /usr/local/bundle
+        path: vendor/bundle
         key: ruby-2.4.5-gems-${{ hashFiles('**/Gemfile') }}
         restore-keys: |
           ruby-2.4.5-gems-
     - name: Install/update dependencies
       run: |
+        bundle config path vendor/bundle
         bundle config set without 'system_tests'
         bundle install --jobs $(nproc) --retry 3
     - name: Syntax check
