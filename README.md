@@ -19,7 +19,7 @@ Puppet module handling a full automatic Proxmox installation over a fresh Debian
 The purpose of this module is to provision Proxmox servers at providers who don't offer it preinstalled.
 You just order a Debian 10, run puppet and voila! You have a default Proxmox server.
 
-We do not plan on adding features for anything that can be done via Proxmox's web interface, command line, terraform... 
+We do not plan on adding features for anything that can be done via Proxmox's web interface, command line, terraform...
 
 ## Setup
 
