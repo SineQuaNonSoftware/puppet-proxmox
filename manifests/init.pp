@@ -9,7 +9,8 @@
 class proxmox {
 
   # Make sure the module is run on a debian 10
-  if( $facts['os']['name'] != 'Debian' or $facts['os']['release']['major'] != '10' ) {
+  if( $facts['os']['name'] != 'Debian' or ( $facts['os']['release']['major'] != '10' ) and ( $facts['os']['release']['major'] != '10' ) )
+  {
     fail('This modules only works on Debian 10 "buster"')
   }
 
