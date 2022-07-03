@@ -1,4 +1,4 @@
-name: Valid for Puppet 5 and 6 and published on the Forge
+name: Valid for Puppet 5 through 7 and published on the Forge
 on: [push, pull_request]
 
 jobs:
@@ -38,10 +38,28 @@ jobs:
     - name: Test suite
       run: bundle exec rake parallel_spec
 
+  build_puppet7:
+    name: Validate for Puppet 7
+    runs-on: ubuntu-latest
+    env:
+      PUPPET_GEM_VERSION: '~> 7'
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.6
+        bundler-cache: true
+    - name: Display the versions used
+      run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
+    - name: Syntax check
+      run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
+    - name: Test suite
+      run: bundle exec rake parallel_spec
+
   build_forge:
     name: Build and publish to Puppet Forge
     runs-on: ubuntu-latest
-    needs: [ build_puppet5, build_puppet6 ]
+    needs: [ build_puppet5, build_puppet6, build_puppet7 ]
     steps:
     - name: Get latest tag
       run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
