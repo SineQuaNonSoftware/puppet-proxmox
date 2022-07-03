@@ -1,4 +1,4 @@
-![Valid for Puppet 5 and 6 and published on the Forge](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/Valid%20for%20Puppet%205%20and%206%20and%20published%20on%20the%20Forge/badge.svg)
+![Valid for Puppet 5 and 6 and published on the Forge](https://github.com/SineQuaNonSoftware/puppet-proxmox/workflows/Valid%20for%20Puppet%205%20through%207%20and%20published%20on%20the%20Forge/badge.svg)
 
 ![](http://img.shields.io/badge/license-MIT-brightgreen.svg)
 
