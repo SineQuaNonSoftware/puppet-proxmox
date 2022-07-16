@@ -5,17 +5,18 @@
 #
 # @example
 #   include proxmox
-
+#
 class proxmox {
 
   # Make sure the module is run on a debian 10
-  if( $facts['os']['name'] != 'Debian' or ( $facts['os']['release']['major'] != '10' ) and ( $facts['os']['release']['major'] != '10' ) )
+  if( $facts['os']['name'] != 'Debian' )
   {
-    if(!($facts['os']['release']['major'] == '10' or
-    $facts['os']['release']['major'] == '11' ))
-    {
-      fail('This modules only works on Debian 10 or 11 ("buster" & "bullseye").')
-    }
+    fail('This modules only works on Debian.')
+  }
+
+  if ( $facts['os']['release']['major'] < 10 ) or ( $facts['os']['release']['major'] > 11 )
+  {
+    fail('This modules only works on Debian 10 or 11 ("buster" & "bullseye").')
   }
 
   contain proxmox::packages # Setup the puppet repo and do another full-upgrade

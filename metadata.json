@@ -1,8 +1,8 @@
 {
   "name": "cornuwel-proxmox",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "author": "Julien Cornuwel & Clément Goubert",
-  "summary": "A simple module that just installs Proxmox over a fresh Debian buster",
+  "summary": "A simple module that just installs Proxmox over a fresh Debian",
   "license": "MIT",
   "source": "https://github.com/SineQuaNonSoftware/puppet-proxmox",
   "project_page": "https://github.com/SineQuaNonSoftware/puppet-proxmox",
