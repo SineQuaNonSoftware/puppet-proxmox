@@ -14,7 +14,8 @@ class proxmox {
     fail('This modules only works on Debian.')
   }
 
-  if ( $facts['os']['release']['major'] < 10 ) or ( $facts['os']['release']['major'] > 11 )
+  $debian_version = Integer($facts['os']['release']['major'])
+  if ( $debian_version < 10 ) or ( $debian_version > 11 )
   {
     fail('This modules only works on Debian 10 or 11 ("buster" & "bullseye").')
   }
