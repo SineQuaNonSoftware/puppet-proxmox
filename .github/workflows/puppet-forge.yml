@@ -39,6 +39,7 @@ jobs:
       run: bundle exec rake parallel_spec
 
   build_forge:
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     name: Build and publish to Puppet Forge
     runs-on: ubuntu-latest
     needs: [ build_puppet6, build_puppet7 ]
