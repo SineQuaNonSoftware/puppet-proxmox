@@ -41,7 +41,7 @@ jobs:
   build_forge:
     name: Build and publish to Puppet Forge
     runs-on: ubuntu-latest
-    needs: [ build_puppet5, build_puppet6, build_puppet7 ]
+    needs: [ build_puppet6, build_puppet7 ]
     steps:
     - name: Get latest tag
       id: vars
