@@ -15,32 +15,6 @@ class proxmox::install {
     notify => Reboot['proxmox_install'],
   }
 
-  # Public network bridge, ipv4
-  network::interface { 'vmbr0':
-    family       => 'inet',
-    ipaddress    => $::ipaddress,
-    netmask      => $::netmask,
-    gateway      => $facts['gatewayv4'],
-    bridge_ports => [ $facts['netdev'] ],
-    bridge_stp   => 'off',
-    bridge_fd    => 0,
-  }
-  # Private network bridge, ipv4
-  network::interface { 'vmbr1':
-    family       => 'inet',
-    address      => '10.0.1.1/24',
-    bridge_ports => ['none'],
-    bridge_stp   => 'off',
-    bridge_fd    => 0,
-    post_up      => [
-      'echo 1 > /proc/sys/net/ipv4/ip_forward',
-      'iptables -t nat -A POSTROUTING -s \'10.0.1.0/24\' -o vmbr0 -j MASQUERADE',
-    ],
-    post_down    => [
-      'iptables -t nat -D POSTROUTING -s \'10.0.1.0/24\' -o vmbr0 -j MASQUERADE',
-    ],
-  }
-
   reboot { 'proxmox_install':
     apply =>  finished, # Wait until entire catalog is applied before rebooting
   }

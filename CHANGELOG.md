@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Release 0.2.3
+
+Removes network configuration. People want their own configuration and the module shouldn't overwrite what they are doing.
+
 ## Release 0.2.2
 
 **Features**
