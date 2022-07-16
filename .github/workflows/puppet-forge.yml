@@ -1,25 +1,7 @@
-name: Valid for Puppet 5 through 7 and published on the Forge
+name: Valid for Puppet 6 through 7 and published on the Forge
 on: [push, pull_request]
 
 jobs:
-  build_puppet5:
-    name: Validate for Puppet 5
-    runs-on: ubuntu-latest
-    env:
-      PUPPET_GEM_VERSION: '~> 5'
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.4.5
-        bundler-cache: true
-    - name: Display the versions used
-      run: ruby --version && echo -n 'gem ' && gem --version && bundle --version
-    - name: Syntax check
-      run: bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
-    - name: Test suite
-      run: bundle exec rake parallel_spec
-
   build_puppet6:
     name: Validate for Puppet 6
     runs-on: ubuntu-latest
@@ -62,20 +44,13 @@ jobs:
     needs: [ build_puppet5, build_puppet6, build_puppet7 ]
     steps:
     - name: Get latest tag
-      run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
-    - name: Check tag
-      id: check-tag
-      run: |
-        if [[ $RELEASE_VERSION =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-          echo ::set-output name=match::true
-        fi
+      id: vars
+      run: echo ::set-output name=tag::${GITHUB_REF:10}
     - name: Clone repository
-      if: steps.check-tag.outputs.match == 'true'
       uses: actions/checkout@v2
       with:
-        ref: ${{ env.RELEASE_VERSION }}
+        ref: ${{ steps.vars.outputs.tag }}
     - name: Build and publish module
-      if: steps.check-tag.outputs.match == 'true'
       uses: barnumbirr/action-forge-publish@v2.9.0
       env:
        FORGE_API_KEY: ${{ secrets.FORGE_API_KEY }}
